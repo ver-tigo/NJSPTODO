@@ -2,9 +2,7 @@ import TodoItem from "@/components/TodoItem";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 
-function getTodos() {
-  return prisma.todo.findMany()
-}
+const todos: Todo[] = await prisma.todo.findMany();
 
 async function toggleTodo(id: string, complete: boolean) {
   "use server"
@@ -12,8 +10,6 @@ async function toggleTodo(id: string, complete: boolean) {
 }
 
 export default async function Home() {
-
-const todos = await getTodos()
 
 prisma.todo.create({ data: { title: "test", complete: false } })
 
