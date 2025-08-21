@@ -1,17 +1,30 @@
 import TodoItem from "@/components/TodoItem";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const todos: Todo[] = await prisma.todo.findMany();
+// Define the Todo type
+type Todo = {
+  id: string;
+  title: string;
+  complete: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 async function toggleTodo(id: string, complete: boolean) {
-  "use server"
-  await prisma.todo.update({ where: { id }, data: { complete } })
+  "use server";
+  await prisma.todo.update({ 
+    where: { id }, 
+    data: { complete } 
+  });
+  redirect("/");
 }
 
 export default async function Home() {
-
-prisma.todo.create({ data: { title: "test", complete: false } })
+  const todos: Todo[] = await prisma.todo.findMany({
+    orderBy: { createdAt: "desc" }
+  });
 
   return (
     <>
