@@ -5,9 +5,10 @@ import Link from "next/link";
 async function createTodo(data: FormData) {
 "use server";
 
-const title = data.get("title")?.valueOf()
-if (typeof title !== "string" || title.length === 0) {
-    throw new Error("Invalid Title")
+const title = data.get("title");
+if (typeof title !== "string" || title.trim().length === 0) {
+    //throw new Error("Invalid Title")
+    return;
 }
 await prisma.todo.create({ data: { title, complete: false }})
 redirect("/")
