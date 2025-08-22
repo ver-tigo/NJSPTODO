@@ -1,5 +1,5 @@
 import TodoItem from "@/components/TodoItem";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 // Define the Todo type
