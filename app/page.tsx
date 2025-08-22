@@ -1,7 +1,6 @@
 import TodoItem from "@/components/TodoItem";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 // Define the Todo type
 type Todo = {
@@ -18,7 +17,6 @@ async function toggleTodo(id: string, complete: boolean) {
     where: { id }, 
     data: { complete } 
   });
-  redirect("/");
 }
 
 export default async function Home() {
